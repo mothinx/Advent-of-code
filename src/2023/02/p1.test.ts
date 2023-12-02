@@ -1,15 +1,15 @@
 import {describe, expect, test} from "vitest";
-import * as fs from "fs";
 import {p1} from "./p1";
+import { readFile } from "../../lib/file";
 
 describe("p1", () => {
     test("acceptance", () => {
-        let readFileSync = fs.readFileSync("src/2023/02/example.txt", "utf8");
-        expect(p1(readFileSync)).toBe(8);
+        const data = readFile("src/2023/02/example.txt");
+        expect(p1(data)).toBe(8);
     })
 
     test("input", () => {
-        let readFileSync = fs.readFileSync("src/2023/02/input.txt", "utf8");
-        console.log(p1(readFileSync))
+        const data = readFile("src/2023/02/input.txt");
+        console.log(p1(data))
     });
 });
