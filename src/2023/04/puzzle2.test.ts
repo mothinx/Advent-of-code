@@ -8,7 +8,7 @@ describe("puzzle2", () => {
         expect(puzzle2(data)).toBe(30);
     })
 
-    test.skip("input", () => {
+    test("input", () => {
         const data = readFile("src/2023/04/input.txt");
         console.log(puzzle2(data))
     });

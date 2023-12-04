@@ -25,25 +25,16 @@ function processScratchcards(scratchcards: Scratchcard[]): number {
     }
 
 
-    let totalScratchcards = scratchcards.length;
-    const cardsToProceed = [...scratchcards];
-    do {
-        const scratchcardToProceed = cardsToProceed.shift();
-        const number = countMatchingNumbers(scratchcardToProceed);
-        if(number > 0) {
-            console.log(scratchcardToProceed)
-            for(let i = scratchcardToProceed.cardNumber + 1; i < scratchcardToProceed.cardNumber! + number + 1; i ++) {
-                const cardWin = scratchcards.find(c => c.cardNumber === i);
-                if(cardWin) {
-                    totalScratchcards++;
-                    cardsToProceed.push(cardWin);
-                }
-            }
+    let totalScratchcards: Map<number, number> = new Map();
+    scratchcards.forEach((card) => {
+        totalScratchcards.set(card.cardNumber, 1);
+    });
+    scratchcards.forEach((card) => {
+        const matchingNumbers = countMatchingNumbers(card);
+        for(let i = card.cardNumber + 1; i <= card.cardNumber + matchingNumbers; i++) {
+            totalScratchcards.set(i, (totalScratchcards.get(i) || 0) + (1 * totalScratchcards.get(card.cardNumber)!));
         }
-
-    }
-    while (cardsToProceed.length > 0);
-
-    return totalScratchcards;
+    });
+    return Array.from(totalScratchcards.values()).reduce((a, b) => a + b, 0);
 }
 // Example usage
