@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "new-day": "bun src/lib/new-day.ts"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
